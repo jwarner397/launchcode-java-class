@@ -3,10 +3,10 @@
  * Created by Joseph on 4/28/2015.
  */
 public class Course {
-    private String courseName;
-    private int courseCredits;
-    private int numberOfSeats;
-    private Student[] studentRoster;
+    protected String courseName;
+    protected int courseCredits;
+    protected int numberOfSeats;
+    protected Student[] studentRoster;
 
     public Course(String courseName, int courseCredits, int numberOfSeats, Student[] studentRoster) {
         this.courseName = courseName;

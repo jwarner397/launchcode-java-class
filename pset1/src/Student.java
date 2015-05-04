@@ -1,17 +1,13 @@
 /**
  * Created by Joseph Warner on 4/28/2015.
  */
-public class Student {
+public class Student extends Person {
+    protected int studentID;
+    protected int credits;
+    protected double GPA;
 
-    private String firstName;
-    private String lastName;
-    private int studentID;
-    private int credits;
-    private double GPA;
-
-    public Student(String firstName, String lastName, int studentID, int credits, double GPA) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Student(String gender, int age, String homeTown, String firstName, String lastName, int studentID, int credits, double GPA) {
+        super(firstName, lastName, gender, age, homeTown);
         this.studentID = studentID;
         this.credits = credits;
         this.GPA = GPA;
@@ -19,19 +15,15 @@ public class Student {
 
     // second constructor for creating legacy students
     public Student(Student mother, Student father) {
-        this.firstName = mother.firstName.concat(mother.lastName);
-        this.lastName = father.firstName.concat(father.lastName);
+        super(mother.firstName.concat(mother.lastName),
+             father.firstName.concat(father.lastName),
+             mother.gender,
+             ((mother.age + father.age) / 2),
+             father.homeTown);
+
         this.studentID = (int)(Math.random() * 500000);
         this.credits = legacyCredits(mother, father);
         this.GPA =(mother.GPA + father.GPA)/2;
-    }
-
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    public String getLastName() {
-        return this.lastName;
     }
 
     public int getStudentID() {
@@ -117,9 +109,9 @@ public class Student {
 
     public static void main(String args[]) {
         // Create too many students for the course
-        Student a = new Student("Joe", "Warner", 123456, 100, 4.0);
-        Student b = new Student("Shelly", "Warner", 789012, 30, 4.0);
-        Student c = new Student("Jeff", "Jones", 345678, 30, 2.1);
+        Student a = new Student("male", 46, "St Louis", "Joe", "Warner", 123456, 100, 4.0);
+        Student b = new Student("female", 45, "Affton", "Shelly", "Warner", 789012, 30, 4.0);
+        /* Student c = new Student("Jeff", "Jones", 345678, 30, 2.1);
         Student d = new Student("Brett", "Smith", 901234, 87, 3.2);
         Student e = new Student("Brian", "Davis", 567890, 90, 1.9);
         Student f = new Student("Karen", "Warner", 212345, 67, 4.0);
@@ -137,7 +129,7 @@ public class Student {
         Student r = new Student("Terri", "Warner", 823746, 100, 2.0);
         Student s = new Student("Bill", "Gates", 192837, 90, 2.5);
         Student t = new Student("Stuart", "Little", 909090, 25, 3.7);
-        Student u = new Student("Dustin", "Hoffman", 808080, 15, 4.0);
+        Student u = new Student("Dustin", "Hoffman", 808080, 15, 4.0); */
 
         // create a new course
         Course CS50 = new Course("CS50", 3, 20, new Student[20]);
@@ -145,7 +137,7 @@ public class Student {
         // add the students to the course
         CS50.addStudent(a);
         CS50.addStudent(b);
-        CS50.addStudent(c);
+        /* CS50.addStudent(c);
         CS50.addStudent(d);
         CS50.addStudent(e);
         CS50.addStudent(f);
@@ -163,7 +155,7 @@ public class Student {
         CS50.addStudent(r);
         CS50.addStudent(s);
         CS50.addStudent(t);
-        CS50.addStudent(u);
+        CS50.addStudent(u);*/
 
         // print out the course's average GPA
         System.out.println(CS50.courseGPA());
@@ -172,7 +164,7 @@ public class Student {
         CS50.printRoster();
 
         // create a legacy student
-        Student legacy = k.createLegacy(s);
+        Student legacy = a.createLegacy(b);
 
         // access the new legacy student and print out some info
         System.out.println(legacy.toString() + " " + legacy.getGPA());

@@ -1,13 +1,14 @@
 import javax.swing.*;
 import java.awt.event.ItemListener;
-
+import java.util.List;
+import java.io.*;
 /**
  * Created by Joseph on 5/5/2015.
  */
 public class Multiple_Choice_Question extends Quiz_Question {
     private String[] answerOptions;
 
-    public Multiple_Choice_Question(String question, String answer, String[] answerOptions) {
+    public Multiple_Choice_Question(String question, String[] answer, String[] answerOptions) {
         super(question, answer);
         this.answerOptions = answerOptions;
     }
@@ -16,19 +17,23 @@ public class Multiple_Choice_Question extends Quiz_Question {
         return this.answerOptions;
     }
 
-    /* public void displayQuestion() {
-        System.out.println(this.getQuestion());
-        int arrLength = this.answerOptions.length;
-        for (String answerOption : this.answerOptions) {
-            System.out.println(answerOption);
+    public double checkAnswer(String[] inputAnswer) {
+        int inputLength = inputAnswer.length;
+        int answerLength = this.getAnswer().length;
+        int count = 0;
+        for (int i = 0; i < answerLength; i++){
+            for (int j = 0; j < inputLength; j++) {
+                String lower = inputAnswer[j].toLowerCase();
+                if (lower.equals(this.getAnswer()[i])) {
+                    count++;
+                }
+            }
         }
-    } */
-
-    public boolean checkAnswer(String inputAnswer) {
-        return (this.getAnswer().equals(inputAnswer.toLowerCase()));
+        return (count/answerLength);
     }
 
-    public String createDialog() {
+    @Override
+    public String[] createDialog() {
         Object[] possibilities = this.answerOptions;
         String input = (String) JOptionPane.showInputDialog(
                 null,
@@ -39,10 +44,10 @@ public class Multiple_Choice_Question extends Quiz_Question {
                 possibilities,
                 null);
 
-
         //If a string was returned, say so.
         if ((input != null) && (input.length() > 0)) {
-            return input.toLowerCase();
+            String answer = input.toLowerCase();
+            return new String[]{answer};
         } else {
             //If you're here, the return value was null/empty.
             return (null);
@@ -51,9 +56,11 @@ public class Multiple_Choice_Question extends Quiz_Question {
 
     public static void main(String args[]) {
         String[] aAnswerOptions = new String[]{"red", "white", "blue", "green"};
-        Multiple_Choice_Question a = new Multiple_Choice_Question(("What color is the wall?"), "blue", aAnswerOptions);
+        String[] aAnswers = {"blue"};
+        Multiple_Choice_Question a = new Multiple_Choice_Question(("What color is the wall?"), aAnswers, aAnswerOptions);
         // a.displayQuestion();
-        a.checkAnswer("Blue");
+        String[] aInputAnswer = {"Blue"};
+        a.checkAnswer(aInputAnswer);
 
     }
 

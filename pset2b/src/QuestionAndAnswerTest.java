@@ -9,19 +9,26 @@ public class QuestionAndAnswerTest extends TestCase {
     @Test
     public void testQuestions() {
         String[] aAnswerOptions = {"red", "white", "blue", "green"};
-        Multiple_Choice_Question a = new Multiple_Choice_Question("What color is the wall?", "white", aAnswerOptions);
-        assertEquals(true, a.checkAnswer("White"));
+        String[] aAnswer = {"white"};
+        Multiple_Choice_Question a = new Multiple_Choice_Question("What color is the wall?", aAnswer, aAnswerOptions);
+        String[] aInputAnswer = {"White"};
+        assertEquals(1.0, a.checkAnswer(aInputAnswer));
         // assertEquals("white", a.createDialog());
-        Quiz_Question b = new Quiz_Question("What is the name of this building?", "trex");
-        FITB_Question d = new FITB_Question("What is the name of this building?", "trex");
+        String[] bAnswer = {"trex"};
+        Quiz_Question b = new Quiz_Question("What is the name of this building?", bAnswer);
+        FITB_Question d = new FITB_Question("What is the name of this building?", bAnswer);
+        String[] fAnswer = {"46"};
+        FITB_Question f = new FITB_Question("How old are you?", fAnswer);
+        assertEquals(true, f.checkAnswer("46"));
         // assertEquals("trex", d.createFitbDialog());
         assertEquals(true, d.checkAnswer("TreX"));
+        // assertEquals("46", f.createFitbDialog());
         String[] eAnswerOptions = {"trash can", "bottle", "chair", "fan"};
-        MCMAQuestion e = new MCMAQuestion("What is on the table?", "bottle fan", eAnswerOptions);
-        assertEquals(true, e.checkMCMAAnswer("bottle fan"));
-        // System.out.println("answerBuffer = " + e.getAnswerBuffer());
-        assertEquals("bottle fan", e.createMCMADialog());
-        // System.out.println("userAnswer = " + e.getUserAnswer());
+        String[] eAnswer = {"bottle", "fan"};
+        MultiCMultiAQuestion h = new MultiCMultiAQuestion("What is on the table?", eAnswer, eAnswerOptions);
+        h.createDialog();
+        // assertEquals(true, h.checkAnswer("bottle, fan"));
+
 
 
 

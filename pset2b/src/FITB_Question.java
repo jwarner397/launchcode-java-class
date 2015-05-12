@@ -6,19 +6,22 @@ import javax.swing.*;
 public class FITB_Question extends Quiz_Question {
     private Quiz_Question question;
 
-    public FITB_Question(String question, String answer) {
+    public FITB_Question(String question, String[] answer) {
         super(question, answer);
     }
 
-    public String getAnswer() {
-        return this.answer;
+    public double checkAnswer(String[] inputAnswer) {
+        int answerLength = this.getAnswer().length;
+        for (int i = 0; i < answerLength; i++){
+            String lower = inputAnswer[0].toLowerCase();
+            if (lower.equals(this.getAnswer()[i])) {
+                    return 1.0;
+            }
+        }
+        return (0);
     }
 
-    public boolean checkAnswer(String inputAnswer) {
-        return (this.getAnswer().equals(inputAnswer.toLowerCase()));
-    }
-
-    public String createFitbDialog() {
+    public String[] createDialog() {
         String input = (String) JOptionPane.showInputDialog(
                 null,
                 this.getQuestion() + "\n",
@@ -31,9 +34,9 @@ public class FITB_Question extends Quiz_Question {
 
         //If a string was returned, say so.
         if ((input != null) && (input.length() > 0)) {
-            return input.toLowerCase();
+            String answer = input.toLowerCase();
+            return new String[]{answer};
         } else {
-
             //If you're here, the return value was null/empty.
             return (null);
         }

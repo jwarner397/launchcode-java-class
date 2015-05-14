@@ -18,7 +18,7 @@ public class Quiz {
         double correct = 0;
         for (int i = 0; i < length; i++) {
             String[] answer = this.quiz[i].createDialog();
-            correct = correct + this.quiz[i].checkAnswer(answer[0]);
+            correct += this.quiz[i].checkAnswer(answer[0]);
         }
         System.out.println("Your score is " + (correct/length * 100) + "%");
 

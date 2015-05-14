@@ -19,15 +19,15 @@ public class QuestionAndAnswerTest extends TestCase {
         FITB_Question d = new FITB_Question("What is the name of this building?", bAnswer);
         String[] fAnswer = {"46"};
         FITB_Question f = new FITB_Question("How old are you?", fAnswer);
-        assertEquals(true, f.checkAnswer("46"));
+        assertEquals(1.0, f.checkAnswer("46"));
         // assertEquals("trex", d.createFitbDialog());
-        assertEquals(true, d.checkAnswer("TreX"));
+        assertEquals(1.0, d.checkAnswer("TreX"));
         // assertEquals("46", f.createFitbDialog());
         String[] eAnswerOptions = {"trash can", "bottle", "chair", "fan"};
         String[] eAnswer = {"bottle", "fan"};
         MultiCMultiAQuestion h = new MultiCMultiAQuestion("What is on the table?", eAnswer, eAnswerOptions);
         h.createDialog();
-        // assertEquals(true, h.checkAnswer("bottle, fan"));
+        assertEquals(true, h.checkAnswer("bottle,fan"));
 
 
 

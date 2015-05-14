@@ -33,12 +33,14 @@ public class FITB_Question extends Quiz_Question {
 
 
         //If a string was returned, say so.
-        if ((input != null) && (input.length() > 0)) {
+        try {
             String answer = input.toLowerCase();
             return new String[]{answer};
-        } else {
+        } catch(NullPointerException e) {
             //If you're here, the return value was null/empty.
-            return (null);
+            JOptionPane.showMessageDialog(null, "Wrong answer!", "Error", JOptionPane.INFORMATION_MESSAGE);
+            String answer = "";
+            return new String[]{answer};
         }
     }
 }

@@ -19,7 +19,6 @@ public class MultiCMultiAQuestion extends Quiz_Question {
                 String lower = inputAnswer[j].toLowerCase();
                 if (lower.equals(this.getAnswer()[i])) {
                     count++;
-                    System.out.println(count);
                 }
             }
         }
@@ -36,19 +35,18 @@ public class MultiCMultiAQuestion extends Quiz_Question {
         System.out.println("Enter your answer(s)");
         String input = scan.nextLine();
         return input.split(",");
+
     }
 
     public static void main(String args[]) {
         String[] aAnswerOptions = new String[]{"trash can", "bottle", "chair", "fan"};
-        String[] aAnswer = new String[] {"bottle", "fan"};
+        String[] aAnswer = new String[] {"bottle","fan"};
         MultiCMultiAQuestion a = new MultiCMultiAQuestion("What is on the table?", aAnswer, aAnswerOptions);
         // a.createDialog();
         // Scanner scan = new Scanner(System.in);
         String[] input = a.createDialog();
-        System.out.print(input);
-        String[] parsedAnswer = input[0].split(",");
-        double correct = a.checkAnswer(parsedAnswer);
-        // a.checkAnswer("bottle fan");
+        double correct = a.checkAnswer(input);
+        // double correct = a.checkAnswer(aAnswer);
         System.out.println(correct);
     }
 

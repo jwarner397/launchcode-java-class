@@ -19,15 +19,15 @@ public class ArraySorter {
     }
 
     public static void main(String[] args) {
-        String[] aArray = {"jar", "candy", "desk", "fan", "floor", "ceiling", "bar", "beer", "laptop"};
+        String[] randomArray = ArraySorterFactory.assembleArray(211000);
         long startTimeBS = System.nanoTime();
-        BubbleSort a = new BubbleSort(aArray);
+        SortStrategy a = ArraySorterFactory.getBubble(randomArray);
         long endTimeBS = System.nanoTime();
         long startTimeIS = System.nanoTime();
-        InsertionSort b = new InsertionSort(aArray);
+        SortStrategy b = ArraySorterFactory.getInsetion(randomArray);
         long endTimeIS = System.nanoTime();
         long startTimeMS = System.nanoTime();
-        MergeSort c = new MergeSort(aArray);
+        SortStrategy c = ArraySorterFactory.getMerge(randomArray);
         long endTimeMS = System.nanoTime();
         System.out.println("Bubble Sort took " + (endTimeBS - startTimeBS) + " nanoseconds.");
         System.out.println("Insertion Sort took "+ (endTimeIS - startTimeIS) + " nanoseconds.");
@@ -35,7 +35,8 @@ public class ArraySorter {
         // System.out.println("This is the unsorted array");
         // printArray(aArray);
         // System.out.println("Now it's sorted!");
-        printArray(sortUnsortedArray(c));
+        // printArray(sortUnsortedArray(c));
+        // printArray(randomArray);
 
 
     }
